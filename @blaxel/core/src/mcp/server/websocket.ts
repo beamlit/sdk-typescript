@@ -1,9 +1,9 @@
 import { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import { v4 as uuidv4 } from "uuid";
 import WebSocket, { WebSocketServer } from "ws";
-import { env } from "../common/env.js";
-import { logger } from "../common/logger.js";
-import { BlaxelSpan, startSpan } from "../telemetry/telemetry.js";
+import { env } from "../../common/env.js";
+import { logger } from "../../common/logger.js";
+import { BlaxelSpan, startSpan } from "../../telemetry/telemetry.js";
 const spans = new Map<string, BlaxelSpan>();
 
 interface JSONRPCMessage {
@@ -13,7 +13,7 @@ interface JSONRPCMessage {
   params?: Record<string, unknown>;
 }
 
-export class BlaxelMcpServerTransport implements Transport {
+export class BlaxelWebsocketMcpServerTransport implements Transport {
   private port: number;
   private wss!: WebSocketServer;
   private clients: Map<string, { ws: WebSocket }> = new Map();
